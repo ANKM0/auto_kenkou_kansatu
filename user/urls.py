@@ -7,9 +7,9 @@ from . import views
 
 urlpatterns = [
     # ホーム
-    # path('', views.IndexView, name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     path('howto/', views.HowtoView.as_view(), name='howto'),
-    path('', views.LineLogin.as_view(), name='linelogin'),
+    path('linelogin/', views.LineLogin.as_view(), name='linelogin'),
 
 
     # # 詳細画面

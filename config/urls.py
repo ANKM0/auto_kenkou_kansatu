@@ -21,4 +21,3 @@ urlpatterns = [
     path('', include('user.urls')),
     path('auth/', include('allauth.urls')),     # 追加
 ]
-# 
