@@ -1,6 +1,9 @@
 {% extends 'user/base.html' %}
+{% comment %} {% load account %} {% endcomment %}
 
 {% block content %}
     <h2 class="my-4">使い方</h2>
+    
+    {% comment %} {% user_display user %} {% endcomment %}
 
 {% endblock content %}

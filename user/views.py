@@ -15,3 +15,7 @@ class IndexView(TemplateView):
 
 class HowtoView(TemplateView, LoginRequiredMixin):
     template_name = "user/howto.html"
+
+
+class LogoutView(TemplateView):
+    template_name = "user/logout.html"
