@@ -40,6 +40,11 @@ INSTALLED_APPS = [
     'crispy_forms',  # 追加
     'django_filters',   # 追加した
     'user',  # 追加
+    'django.contrib.sites',                         # 追加
+    'allauth',                                      # 追加
+    'allauth.account',                              # 追加
+    'allauth.socialaccount',                        # 追加
+    'allauth.socialaccount.providers.line',         # 追加
 ]
 
 MIDDLEWARE = [
@@ -126,3 +131,24 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Authentication
+# Don't forget this little dude.
+SITE_ID = 1
+
+# ログインのリダイレクトURL
+LOGIN_REDIRECT_URL = '/'
+
+# ログアウトのリダイレクトURL
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SOCIALACCOUNT_PROVIDERS = {
+    'line': {
+        'SCOPE': ['profile', 'openid'],
+    }
+}

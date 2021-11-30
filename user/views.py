@@ -1,4 +1,4 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 from django.views.generic import TemplateView
 
 
@@ -16,3 +16,8 @@ class AboutView(TemplateView):
 
 class InfoView(TemplateView):
     template_name = "user/info.html"
+
+
+def LineLogin(request):
+    """トップ画面"""
+    return render(request, 'user/line_login.html')

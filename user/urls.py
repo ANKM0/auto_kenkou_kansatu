@@ -1,17 +1,19 @@
 from django.urls import path
-from .views import AboutView, HowtoView, IndexView, InfoView
-from django.contrib.auth import views as auth_views
-# from . import views
+from . import views
+# from django.contrib.auth import views as auth_views
+
 # from .views import ItemFilterView, ItemDetailView, ItemCreateView, ItemUpdateView, ItemDeleteView
 
 
 urlpatterns = [
     # ホーム
-    path('', IndexView.as_view(), name='index'),
-    path('howto/', HowtoView.as_view(), name='howto'),
-    path('login/', auth_views.LoginView.as_view(template_name='user/login.html')),
-    path('about/', AboutView.as_view(), name='about'),
-    path('info/', InfoView.as_view(), name='info'),
+    # path('', views.IndexView, name='index'),
+    path('howto/', views.HowtoView.as_view(), name='howto'),
+    # path('login/', auth_views.LoginView.as_view(template_name='user/login.html')),
+    path('', views.LineLogin, name='linelogin'),
+    path('about/', views.AboutView.as_view(), name='about'),
+    path('info/', views.InfoView.as_view(), name='info'),
+
     # # 詳細画面
     # path('detail/<int:pk>/', ItemDetailView.as_view(), name='detail'),
     # # 登録画面
