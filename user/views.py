@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.views.generic.base import View
 
 
 class IndexView(TemplateView):
@@ -10,14 +11,6 @@ class HowtoView(TemplateView):
     template_name = "user/howto.html"
 
 
-class AboutView(TemplateView):
-    template_name = "user/about.html"
-
-
-class InfoView(TemplateView):
-    template_name = "user/info.html"
-
-
-def LineLogin(request):
-    """トップ画面"""
-    return render(request, 'user/line_login.html')
+class LineLogin(View):
+    def get(self, request):
+        return render(request, 'user/line_login.html')
