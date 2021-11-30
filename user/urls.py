@@ -9,7 +9,6 @@ urlpatterns = [
     # ホーム
     # path('', views.IndexView, name='index'),
     path('howto/', views.HowtoView.as_view(), name='howto'),
-    # path('login/', auth_views.LoginView.as_view(template_name='user/login.html')),
     path('', views.LineLogin, name='linelogin'),
     path('about/', views.AboutView.as_view(), name='about'),
     path('info/', views.InfoView.as_view(), name='info'),
