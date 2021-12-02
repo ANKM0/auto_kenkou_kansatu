@@ -12,7 +12,8 @@ urlpatterns = [
     path('linelogin/', views.LineLogin.as_view(), name='linelogin'),
     path('accounts/', include('allauth.urls')),
     path('auth/logout/', views.LogoutView.as_view(), name='logout'),
-
+    path('new/', views.new, name='new'),
+    path('list/', views.list, name='list'),
 
     # # 詳細画面
     # path('detail/<int:pk>/', ItemDetailView.as_view(), name='detail'),

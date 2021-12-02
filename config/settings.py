@@ -38,14 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',  # 追加
-    'django_filters',   # 追加した
-    'users',  # 追加
-    'django.contrib.sites',                         # 追加
-    'allauth',                                      # 追加
-    'allauth.account',                              # 追加
-    'allauth.socialaccount',                        # 追加
-    'allauth.socialaccount.providers.line',         # 追加
+
+    'crispy_forms',
+    'django_filters',
+    'users',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.line',
 ]
 
 MIDDLEWARE = [

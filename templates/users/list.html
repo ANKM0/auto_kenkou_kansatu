@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Member表</title>
+</head>
+
+<body>
+    <h1>Memberモデル</h1>
+    <p>{{ message }}</p>
+    <table border="1">
+        <tr>
+            <th>name</th>
+            <th>age</th>
+        </tr>
+        {% for member in data %}
+        <tr>
+            <td>{{ member.name }}</td>
+            <td>{{ member.age }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
