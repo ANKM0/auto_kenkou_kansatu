@@ -154,3 +154,5 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE': ['profile', 'openid'],
     }
 }
+
+AUTH_USER_MODEL = 'users.MyUser'
