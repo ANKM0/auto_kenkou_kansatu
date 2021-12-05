@@ -3,8 +3,8 @@
 {% block content %}
     {% if user.is_authenticated %}
     <p>ログイン済</p>
-    <a href="{% url 'account_logout' %}">ログアウト</a>
+    <a href="{% url 'logout' %}"ログアウト</a>
     {% else %}
-    <a href="{% url 'line_login' %}">lineでログイン</a>
+    <a href="{% url 'social:begin' 'line' %}">lineでログイン</a>
     {% endif %}
 {% endblock content %}

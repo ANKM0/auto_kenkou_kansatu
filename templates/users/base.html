@@ -32,14 +32,14 @@
                         <a class="nav-link" href="">メインページ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'line_login' %}">ログアウト</a>
+                        <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="">アカウント登録</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'line_login' %}">ログイン</a>
+                        <a class="nav-link" href="{% url 'social:begin' 'line' %}">ログイン</a>
                     </li>
                 {% endif %}
             </ul>

@@ -5,5 +5,15 @@
     <h2 class="my-4">使い方</h2>
     
     {% comment %} {% user_display user %} {% endcomment %}
+    
+
+    {% if user.is_authenticated %}
+        <p>ユーザー名: {{ user.username }}</p>
+        <a href="{% url 'logout' %}">ログアウト</a>
+    {% else %}
+        <a href="{% url 'social:begin' 'line' %}">LINEでログインする</a>
+    {% endif %}
 
 {% endblock content %}
+
+

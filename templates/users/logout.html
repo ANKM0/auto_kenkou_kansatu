@@ -5,5 +5,5 @@
 {% block content %}
 <h2>Logged Out</h2>
 <p>ログアウトしました。</p>
-<p><a href="{% url 'line_login' %}">再ログインする</a></p>
+<p><a href="{% url 'social:begin' 'line' %}">再ログインする</a></p>
 {% endblock %}

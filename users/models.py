@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils.translation import gettext_lazy as _
-# from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils import timezone
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 
 class Member(models.Model):
@@ -97,3 +97,13 @@ class MyUser(AbstractBaseUser):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
+
+    @property
+    def icon_url(self):
+        # ユーザーのアイコン画像URLを返す
+        # 1. SNS認証時にプロフィール画像を取得できた場合: sns_icon_url
+        # 2. SNS認証時にプロフィール画像を取得できなかった場合: デフォルト画像
+
+        if self.sns_icon_url:
+            return self.sns_icon_url
+        return staticfiles_storage.url("images/default_icon.png")

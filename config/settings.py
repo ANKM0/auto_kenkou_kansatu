@@ -39,14 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # "django.contrib.sites",
+
+    'social_django',
+
     'crispy_forms',
     'django_filters',
     'users',
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.line',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',  # 追加
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -72,6 +73,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
         },
     },
@@ -134,33 +138,32 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Authentication
-# Don't forget this little dude.
-SITE_ID = 1
-
-# ログインのリダイレクトURL
-LOGIN_REDIRECT_URL = 'howto'
-
-# ログアウトのリダイレクトURL
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    "allauth.account.auth_backends.AuthenticationBackend",
+  'social_core.backends.line.LineOAuth2',  # LINE認証用
+  'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIALACCOUNT_PROVIDERS = {
-    'line': {
-        'SCOPE': ['profile', 'openid'],
-    }
-}
+LOGIN_REDIRECT_URL = "howto"
+LOGOUT_REDIRECT_URL = "/"
 
-AUTH_USER_MODEL = 'users.MyUser'
+
+AUTH_USER_MODEL = 'users.User'
 
 SOCIAL_AUTH_LINE_KEY = '1656675440'
 SOCIAL_AUTH_LINE_SECRET = 'f6ffccdc0df2d4f7028d018ff78bca35'
 
-# ACCOUNT_AUTHENTICATION_METHOD = 'email'  # 認証方法をメールアドレスにする
-# ACCOUNT_USER_MODEL_USERNAME_FIELD = None  # Userモデルにusernameは無い
-# ACCOUNT_EMAIL_REQUIRED = True  # メールアドレスを要求する
-# ACCOUNT_USERNAME_REQUIRED = False  # ユーザー名を要求しない
+SOCIAL_AUTH_PIPELINE = (
+    "social_core.pipeline.social_auth.social_details",
+    "social_core.pipeline.social_auth.social_uid",
+    "social_core.pipeline.social_auth.social_user",
+    "social_core.pipeline.user.get_username",
+    "social_core.pipeline.social_auth.associate_by_email",
+    "social_core.pipeline.user.create_user",
+    "social_core.pipeline.social_auth.associate_user",
+    "social_core.pipeline.social_auth.load_extra_data",
+    "social_core.pipeline.user.user_details",
+    # ↑ デフォルトの設定
+
+    "users.pipeline.set_user_data",  # users/pipeline.pyのset_user_data関数
+)
