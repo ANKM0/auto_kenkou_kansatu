@@ -4,14 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils import timezone
 from django.contrib.staticfiles.storage import staticfiles_storage
-
-
-class Member(models.Model):
-    name = models.CharField(max_length=100)
-    age = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.name
+from django.contrib.auth import get_user_model
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -107,3 +100,22 @@ class MyUser(AbstractBaseUser):
         if self.sns_icon_url:
             return self.sns_icon_url
         return staticfiles_storage.url("images/default_icon.png")
+
+
+class Member(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+
+
+class UserInfo(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    user_info_class_number = models.PositiveSmallIntegerField()
+    user_info_student_number = models.PositiveSmallIntegerField()
+    user_info_student_name = models.CharField(max_length=50)
+    user_info_body_temperature = models.CharField(max_length=10)
+    is_run_code = models.BooleanField(default=True)
+    user_info_created_at = models.DateTimeField(default=timezone.now)
+    user_info_updated_at = models.DateTimeField(blank=True, null=True)

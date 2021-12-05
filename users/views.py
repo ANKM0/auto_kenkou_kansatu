@@ -4,8 +4,8 @@ from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # from . import forms
-from .forms import UserForm
-from .models import Member
+from .forms import UserForm, UserInputForm
+from .models import Member, UserInfo
 
 
 APP_LABEL_USER = "users"
@@ -47,6 +47,27 @@ def list(request):
     data = Member.objects.all()
     params = {'message': 'メンバーの一覧', 'data': data}
     return render(request, '%s/list.html' % APP_LABEL_USER, params)
+
+
+def input(request):
+    params = {'message': '', 'form': None}
+    if request.method == 'POST':
+        form = UserInputForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('output')
+        else:
+            params['message'] = '再入力して下さい'
+            params['form'] = form
+    else:
+        params['form'] = UserInputForm()
+    return render(request, '%s/input.html' % APP_LABEL_USER, params)
+
+
+def output(request):
+    data = UserInfo.objects.all()
+    params = {'message': '登録されているデータ', 'data': data}
+    return render(request, '%s/output.html' % APP_LABEL_USER, params)
 
 
 # class FormView(TemplateView):

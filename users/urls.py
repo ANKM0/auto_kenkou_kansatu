@@ -8,11 +8,12 @@ urlpatterns = [
     # ホーム
     path('', views.IndexView.as_view(), name='index'),
     path('howto/', views.HowtoView.as_view(), name='howto'),
-    # path('linelogin/', views.LineLogin.as_view(), name='linelogin'),
-    # path('accounts/', include('allauth.urls')),
-    # path('auth/logout/', views.LogoutView.as_view(), name='logout'),
+
     path('new/', views.new, name='new'),
     path('list/', views.list, name='list'),
+
+    path('input/', views.input, name='input'),
+    path('output/', views.output, name='output'),
 
     path('', include('social_django.urls', namespace='social')),  # 追加
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),  # 追加
