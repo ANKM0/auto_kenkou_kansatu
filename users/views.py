@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-# from . import forms
 from .forms import UserForm, UserInputForm
 from .models import Member, UserInfo
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 
 APP_LABEL_USER = "users"
@@ -70,6 +71,28 @@ def output(request):
     return render(request, '%s/output.html' % APP_LABEL_USER, params)
 
 
+class ItemCreateView(CreateView):
+    model = UserInfo
+    form_class = UserInputForm
+
+
+class ItemDetailView(LoginRequiredMixin, DetailView):
+    model = UserInfo
+
+
+# 更新画面
+class ItemUpdateView(LoginRequiredMixin, UpdateView):
+    model = UserInfo
+    form_class = UserInputForm
+    success_url = reverse_lazy('item')
+
+
+# 削除画面
+class ItemDeleteView(LoginRequiredMixin, DeleteView):
+    model = UserInfo
+    success_url = reverse_lazy('item')
+
+#
 # class FormView(TemplateView):
 
 #     # 初期変数定義

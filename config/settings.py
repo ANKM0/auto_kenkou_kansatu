@@ -166,3 +166,4 @@ SOCIAL_AUTH_PIPELINE = (
 
     "users.pipeline.set_user_data",  # users/pipeline.pyのset_user_data関数
 )
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

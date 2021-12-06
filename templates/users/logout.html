@@ -1,9 +1,0 @@
-{% extends 'users/base.html' %}
-
-{% block titele %}ログアウト{% endblock %}
-
-{% block content %}
-<h2>Logged Out</h2>
-<p>ログアウトしました。</p>
-<p><a href="{% url 'social:begin' 'line' %}">再ログインする</a></p>
-{% endblock %}

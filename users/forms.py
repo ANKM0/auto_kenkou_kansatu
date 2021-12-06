@@ -19,19 +19,33 @@ class UserForm(forms.ModelForm):
 class UserInputForm(forms.ModelForm):
     class Meta:
         model = UserInfo
-        fields = {"user_info_class_number",
+        fields = ("user_info_class_number",
                   "user_info_student_number",
                   "user_info_student_name",
-                  "user_info_body_temperature"}
+                  "user_info_body_temperature",
+                  "is_run_code"
+                  )
+        field_order = ["user_info_class_number",
+                       "user_info_student_number",
+                       "user_info_student_name",
+                       "user_info_body_temperature",
+                       "is_run_code",
+                       ]
+
         labels = {
             'user_info_class_number': 'クラス番号',
             'user_info_student_number': '出席番号',
             'user_info_student_name': '名前',
-            'user_info_body_temperature': '体温'
+            'user_info_body_temperature': '体温',
+            'is_run_code': '実行するか'
         }
         help_texts = {
             'user_info_class_number': 'クラス番号を入力',
             'user_info_student_number': '出席番号を入力',
             'user_info_student_name': '名前を入力',
-            'user_info_body_temperature': '体温を入力'
+            'user_info_body_temperature': '体温を入力',
+            'is_run_code': '止める時は停止するを選択'
+        }
+        widgets = {
+            "実行するか": forms.RadioSelect()
         }

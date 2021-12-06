@@ -111,11 +111,22 @@ class Member(models.Model):
 
 
 class UserInfo(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    user_info_class_number = models.PositiveSmallIntegerField()
-    user_info_student_number = models.PositiveSmallIntegerField()
-    user_info_student_name = models.CharField(max_length=50)
-    user_info_body_temperature = models.CharField(max_length=10)
-    is_run_code = models.BooleanField(default=True)
+    IS_RUN_CODE_CHOICES = (
+        (1, '実行する'),
+        (0, '停止する')
+    )
+
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, primary_key=True)
+    user_info_class_number = models.PositiveSmallIntegerField(verbose_name="クラス番号")
+    user_info_student_number = models.PositiveSmallIntegerField(verbose_name="出席番号")
+    user_info_student_name = models.CharField(max_length=50, verbose_name="名前")
+    user_info_body_temperature = models.CharField(max_length=10, verbose_name="体温")
+    is_run_code = models.IntegerField(choices=IS_RUN_CODE_CHOICES, default=True, verbose_name="実行するか")
     user_info_created_at = models.DateTimeField(default=timezone.now)
     user_info_updated_at = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.user_info_student_name
+
+    class Meta:
+        verbose_name_plural = 'ユーザー情報'
