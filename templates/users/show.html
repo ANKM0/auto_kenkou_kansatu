@@ -1,0 +1,13 @@
+{% extends './base.html' %}
+
+{% block content %}
+
+{% for xxx in show_data %}
+    <p> {{ xxx.user_info_class_number}} </p>
+    <p> {{ xxx.user_info_student_number}} </p>
+    <p> {{ xxx.user_info_student_name}} </p>
+    <p> {{ xxx.user_info_body_temperature}} </p>
+    <p> {{ xxx.is_run_code}} </p>
+{% endfor %}
+
+{% endblock content %}

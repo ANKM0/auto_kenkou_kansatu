@@ -3,8 +3,8 @@ from django.views.generic import TemplateView, DetailView
 from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import UserForm, UserInputForm
-from .models import Member, UserInfo
+from .forms import UserInputForm
+from .models import UserInfo
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
@@ -28,27 +28,6 @@ class HowtoView(TemplateView, LoginRequiredMixin):
 
 class LogoutView(TemplateView):
     template_name = "%s/logout.html" % APP_LABEL_USER
-
-
-def new(request):
-    params = {'message': '', 'form': None}
-    if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('list')
-        else:
-            params['message'] = '再入力して下さい'
-            params['form'] = form
-    else:
-        params['form'] = UserForm()
-    return render(request, '%s/new.html' % APP_LABEL_USER, params)
-
-
-def list(request):
-    data = Member.objects.all()
-    params = {'message': 'メンバーの一覧', 'data': data}
-    return render(request, '%s/list.html' % APP_LABEL_USER, params)
 
 
 def input(request):

@@ -8,9 +8,6 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('howto/', views.HowtoView.as_view(), name='howto'),
 
-    path('new/', views.new, name='new'),
-    path('list/', views.list, name='list'),
-
     path('input/', views.input, name='input'),
     path('output/', views.output, name='output'),
 
