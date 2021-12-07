@@ -8,6 +8,7 @@ from .models import Member, UserInfo
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
+# from . import forms
 
 APP_LABEL_USER = "users"
 
@@ -71,27 +72,43 @@ def output(request):
     return render(request, '%s/output.html' % APP_LABEL_USER, params)
 
 
+# 作成画面
 class ItemCreateView(CreateView):
     model = UserInfo
     form_class = UserInputForm
+    success_url = reverse_lazy('index')
 
 
+# 詳細画面
 class ItemDetailView(LoginRequiredMixin, DetailView):
     model = UserInfo
+    success_url = reverse_lazy('index')
 
 
 # 更新画面
 class ItemUpdateView(LoginRequiredMixin, UpdateView):
     model = UserInfo
     form_class = UserInputForm
-    success_url = reverse_lazy('item')
+    success_url = reverse_lazy('index')
 
 
 # 削除画面
 class ItemDeleteView(LoginRequiredMixin, DeleteView):
     model = UserInfo
-    success_url = reverse_lazy('item')
+    success_url = reverse_lazy('index')
 
+
+# def form_view(request):
+#     if request.method == 'POST':
+#         form = forms.UserInfo(request.POST)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.username = request.user
+#             post.save()
+#             return redirect('sns:index')
+#     else:
+#         form = forms.UserInfo()
+#     return render(request, 'users/form_view.html', {'form': form})
 #
 # class FormView(TemplateView):
 
