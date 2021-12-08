@@ -25,12 +25,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     line_username = models.CharField(
         _("line_username"),
         max_length=150,
-        unique=True,
-        help_text=_("Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."),
-        validators=[username_validator],
-        error_messages={
-            "unique": _("A user with that line_username already exists."),
-        },
+        unique=False
     )
     email = models.EmailField("メールアドレス", blank=True)
     sns_icon_url = models.URLField("アイコン(SNS連携)", blank=True)
@@ -96,7 +91,7 @@ class UserInfo(models.Model):
         (0, '停止する')
     )
 
-    username = get_user_model()
+    username = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     user_info_class_number = models.PositiveSmallIntegerField(verbose_name="クラス番号")
     user_info_student_number = models.PositiveSmallIntegerField(verbose_name="出席番号")
     user_info_student_name = models.CharField(max_length=50, verbose_name="名前")

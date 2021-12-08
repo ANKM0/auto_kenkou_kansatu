@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect, resolve_url
-from django.views.generic import TemplateView, CreateView, ListView, UpdateView
+from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DeleteView
 from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views import generic
@@ -58,7 +58,7 @@ class LogoutView(TemplateView):
 class UserInfoCreateView(CreateView):
     model = UserInfo
     form_class = UserInfoForm
-    template_name = "%s/form.html" % APP_LABEL_USER
+    template_name = "%s/list.html" % APP_LABEL_USER
     success_url = "/"  # 成功時にリダイレクトするURL
 
 
@@ -71,5 +71,11 @@ class UserInfoUpdateView(UpdateView):
     model = UserInfo
     form_class = UserInfoForm
     template_name = "%s/form.html" % APP_LABEL_USER
-    success_url = "/"
+    success_url = "/list"
 
+
+class UserInfoDeleteView(DeleteView):
+    model = UserInfo
+    form_class = UserInfoForm
+    template_name = "%s/form.html" % APP_LABEL_USER
+    success_url = "/list"
