@@ -16,12 +16,12 @@
             <a class="navbar-brand" href="/">AUTO_KENKO_KANSATU</a>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'index' %}">ホーム</a>
+                    <a class="nav-link" href="{% url 'users:index' %}">ホーム</a>
                     <a class="nav-link" href="
                     {% if user.is_authenticated %}
-                        {% url 'howto' %}
+                        {% url 'users:howto' %}
                     {% else %}
-                        {% url 'index' %}
+                        {% url 'users:index' %}
                     {% endif %}
                     ">使い方</a>
                 </li>
@@ -32,7 +32,7 @@
                         <a class="nav-link" href="">メインページ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
+                        <a class="nav-link" href="{% url 'users:logout' %}">ログアウト</a>
                     </li>
                 {% else %}
                     <li class="nav-item">

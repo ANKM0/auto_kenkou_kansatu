@@ -1,16 +1,19 @@
-from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, DetailView
+from django.contrib.auth import get_user_model
+from django.shortcuts import render, redirect, resolve_url
+from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.views.generic.base import View
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views import generic
 
-from .forms import UserInputForm
+from .forms import UserInfoForm
 from .models import UserInfo
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+# from django.urls import reverse_lazy
 
-# from . import forms
+from.apps import UserConfig
+APP_LABEL_USER = UserConfig.name
 
-APP_LABEL_USER = "users"
+
+User = get_user_model()
 
 
 class LineLogin(View):
@@ -30,84 +33,43 @@ class LogoutView(TemplateView):
     template_name = "%s/logout.html" % APP_LABEL_USER
 
 
-def input(request):
-    params = {'message': '', 'form': None}
-    if request.method == 'POST':
-        form = UserInputForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('output')
-        else:
-            params['message'] = '再入力して下さい'
-            params['form'] = form
-    else:
-        params['form'] = UserInputForm()
-    return render(request, '%s/input.html' % APP_LABEL_USER, params)
+# class OnlyYouMixin(UserPassesTestMixin):
+#     raise_exception = True
+
+#     def test_func(self):
+#         user = self.request.user
+#         return user.pk == self.kwargs['pk'] or user.is_superuser
 
 
-def output(request):
-    data = UserInfo.objects.all()
-    params = {'message': '登録されているデータ', 'data': data}
-    return render(request, '%s/output.html' % APP_LABEL_USER, params)
+# class DetailView(OnlyYouMixin, generic.DetailView):
+#     model = User
+#     template_name = 'user/howto.html'
 
 
-# 作成画面
-class ItemCreateView(CreateView):
+# class UpdateView(OnlyYouMixin, UpdateView):
+#     model = User
+#     template_name = "users/update.html"
+#     form_class = UserInputForm
+
+#     def get_success_url(self):
+#         return resolve_url('users:update', pk=self.kwargs['pk'])
+
+
+class UserInfoCreateView(CreateView):
     model = UserInfo
-    form_class = UserInputForm
-    success_url = reverse_lazy('index')
+    form_class = UserInfoForm
+    template_name = "%s/form.html" % APP_LABEL_USER
+    success_url = "/"  # 成功時にリダイレクトするURL
 
 
-# 詳細画面
-class ItemDetailView(LoginRequiredMixin, DetailView):
+class UserInfoListView(ListView):
     model = UserInfo
-    success_url = reverse_lazy('index')
+    template_name = "%s/list.html" % APP_LABEL_USER
 
 
-# 更新画面
-class ItemUpdateView(LoginRequiredMixin, UpdateView):
+class UserInfoUpdateView(UpdateView):
     model = UserInfo
-    form_class = UserInputForm
-    success_url = reverse_lazy('index')
+    form_class = UserInfoForm
+    template_name = "%s/form.html" % APP_LABEL_USER
+    success_url = "/"
 
-
-# 削除画面
-class ItemDeleteView(LoginRequiredMixin, DeleteView):
-    model = UserInfo
-    success_url = reverse_lazy('index')
-
-
-# def form_view(request):
-#     if request.method == 'POST':
-#         form = forms.UserInfo(request.POST)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.username = request.user
-#             post.save()
-#             return redirect('sns:index')
-#     else:
-#         form = forms.UserInfo()
-#     return render(request, 'users/form_view.html', {'form': form})
-#
-# class FormView(TemplateView):
-
-#     # 初期変数定義
-#     def __init__(self):
-#         self.params = {"Message": "情報を入力してください。",
-#                        "form": forms.Contact_Form(),
-#                        }
-
-#     # GET時の処理を記載
-#     def get(self, request):
-#         return render(request, "%s/formpage.html" % APP_LABEL_USER, context=self.params)
-
-#     # POST時の処理を記載
-#     def post(self, request):
-#         if request.method == "POST":
-#             self.params["form"] = forms.Contact_Form(request.POST)
-
-#             # フォーム入力が有効な場合
-#             if self.params["form"].is_valid():
-#                 self.params["Message"] = "入力情報が送信されました。"
-
-#         return render(request, "%s/formpage.html" % APP_LABEL_USER, context=self.params)

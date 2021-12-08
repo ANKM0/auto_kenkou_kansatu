@@ -1,5 +1,9 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from .models import Member, UserInfo
+
+
+User = get_user_model()
 
 
 class UserForm(forms.ModelForm):
@@ -16,7 +20,7 @@ class UserForm(forms.ModelForm):
         }
 
 
-class UserInputForm(forms.ModelForm):
+class UserInfoForm(forms.ModelForm):
     class Meta:
         model = UserInfo
         fields = ("user_info_class_number",
@@ -49,3 +53,8 @@ class UserInputForm(forms.ModelForm):
         widgets = {
             "実行するか": forms.RadioSelect()
         }
+
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     for field in self.fields.values():
+    #         field.widget.attrs['class'] = 'form-control'
