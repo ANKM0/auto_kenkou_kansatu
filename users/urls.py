@@ -1,10 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 from . import views
-from.apps import UserConfig
 
-
-APP_LABEL_USER = UserConfig.name
 
 urlpatterns = [
     # ホーム
@@ -14,7 +11,7 @@ urlpatterns = [
     path('howto/', views.HowtoView.as_view(), name='howto'),
 
     path("create/", views.UserInfoCreateView.as_view(), name="create"),
-    path("list/", views.UserInfoListView.as_view(), name="list"),
+    path("list/<int:pk>", views.UserInfoListView.as_view(), name="list"),
     path("update/<int:pk>/", views.UserInfoUpdateView.as_view(), name="update"),
-    path("delete/<int:pk>/", views.UserInfoDeleteView.as_view(), name="delete"),
+    # path("delete/<int:pk>/", views.UserInfoDeleteView.as_view(), name="delete"),
 ]

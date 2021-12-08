@@ -13,7 +13,7 @@
         <p> {{ user_info.is_run_code }} </p>
 
         <a href="{% url 'users:update' user.pk %}"> 更新 </a>
-        <a href="{% url 'users:delete' user.pk %}"> 削除 </a>
+        {% comment %} <a href="{% url 'users:delete' user.pk %}"> 削除 </a> {% endcomment %}
     {% endfor %}
     </ul>
 

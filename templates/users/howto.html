@@ -12,5 +12,7 @@
     {% else %}
         <a href="{% url 'social:begin' 'line' %}">LINEでログインする</a>
     {% endif %}
+    
+    <a href="{% url 'users:list' user.pk %}"> リスト </a>
 
 {% endblock content %}

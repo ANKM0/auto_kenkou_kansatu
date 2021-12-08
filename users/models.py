@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin, UserManager
+from django.db.models.deletion import CASCADE
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils import timezone
@@ -77,21 +78,13 @@ class MyUserManager(BaseUserManager):
         return staticfiles_storage.url("images/default_icon.png")
 
 
-class Member(models.Model):
-    name = models.CharField(max_length=100)
-    age = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.name
-
-
 class UserInfo(models.Model):
     IS_RUN_CODE_CHOICES = (
         (1, '実行する'),
         (0, '停止する')
     )
 
-    username = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    username = models.OneToOneField(get_user_model(), on_delete=CASCADE)
     user_info_class_number = models.PositiveSmallIntegerField(verbose_name="クラス番号")
     user_info_student_number = models.PositiveSmallIntegerField(verbose_name="出席番号")
     user_info_student_name = models.CharField(max_length=50, verbose_name="名前")
