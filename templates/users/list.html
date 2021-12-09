@@ -5,16 +5,14 @@
     <h1>userInfo List</h1>
     <a href="/create">create</a>
     <ul>
-    {% for user_info in object_list %}
-        <p> {{ user_info.user_info_class_number }} </p>
-        <p> {{ user_info.user_info_student_number }} </p>
-        <p> {{ user_info.user_info_student_name }} </p>
-        <p> {{ user_info.user_info_body_temperature }} </p>
-        <p> {{ user_info.is_run_code }} </p>
+        <p> {{ object.user_info_class_number }} </p>
+        <p> {{ object.user_info_student_number }} </p>
+        <p> {{ object.user_info_student_name }} </p>
+        <p> {{ object.user_info_body_temperature }} </p>
+        <p> {{ object.is_run_code }} </p>
 
         <a href="{% url 'users:update' user.pk %}"> 更新 </a>
         {% comment %} <a href="{% url 'users:delete' user.pk %}"> 削除 </a> {% endcomment %}
-    {% endfor %}
     </ul>
 
 {% endblock %}

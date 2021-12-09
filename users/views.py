@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, resolve_url
-from django.views.generic import TemplateView, CreateView, ListView, UpdateView
+from django.views.generic import TemplateView, CreateView, UpdateView, DetailView
 from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -54,7 +54,7 @@ class LogoutView(TemplateView):
 #         return resolve_url('users:update', pk=self.kwargs['pk'])
 
 
-class UserInfoCreateView(CreateView, LoginRequiredMixin):
+class UserInfoCreateView(LoginRequiredMixin, CreateView):
     model = UserInfo
     form_class = UserInfoForm
     template_name = "%s/form.html" % APP_LABEL_USER
@@ -70,12 +70,12 @@ class UserInfoCreateView(CreateView, LoginRequiredMixin):
         return super().form_valid(form)
 
 
-class UserInfoListView(ListView, LoginRequiredMixin):
+class UserInfoDetailView(LoginRequiredMixin, DetailView):
     model = UserInfo
     template_name = "%s/list.html" % APP_LABEL_USER
 
     def get_success_url(self):
-        return resolve_url('users:list', pk=self.kwargs['pk'])
+        return resolve_url('users:detail', pk=self.kwargs['pk'])
 
     def form_valid(self, form):
         # データベースに保存する前のモデルオブジェクトを変数に格納
@@ -87,13 +87,13 @@ class UserInfoListView(ListView, LoginRequiredMixin):
         return super().form_valid(form)
 
 
-class UserInfoUpdateView(UpdateView, LoginRequiredMixin):
+class UserInfoUpdateView(LoginRequiredMixin, UpdateView):
     model = UserInfo
     form_class = UserInfoForm
     template_name = "%s/form.html" % APP_LABEL_USER
 
     def get_success_url(self):
-        return resolve_url('users:list', pk=self.kwargs['pk'])
+        return resolve_url('users:detail', pk=self.kwargs['pk'])
 
     def form_valid(self, form):
         # データベースに保存する前のモデルオブジェクトを変数に格納

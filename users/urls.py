@@ -11,7 +11,8 @@ urlpatterns = [
     path('howto/', views.HowtoView.as_view(), name='howto'),
 
     path("create/", views.UserInfoCreateView.as_view(), name="create"),
-    path("list/<int:pk>", views.UserInfoListView.as_view(), name="list"),
+    path("detail/<int:pk>", views.UserInfoDetailView.as_view(), name="detail"),
+    # path("list/<int:pk>", views.UserInfoListView.as_view(), name="list"),
     path("update/<int:pk>/", views.UserInfoUpdateView.as_view(), name="update"),
     # path("delete/<int:pk>/", views.UserInfoDeleteView.as_view(), name="delete"),
 ]
