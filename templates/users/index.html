@@ -1,10 +1,29 @@
 {% extends 'users/base.html' %}
 
-{% block content %}
+{% block content %} 
     {% if user.is_authenticated %}
-    <p>ログイン済</p>
-    <a href="{% url 'users:logout' %}"ログアウト</a>
+        <h2 class="my-4">
+            使い方-><a href="{% url 'users:howto' %}"> 使い方 </a> 
+        </h2>
+        <h2 class="my-4">
+            データの確認-><a href="{% url 'users:create' %}"> 確認 </a>
+        </h2>
+        <h2 class="my-4">
+            データの修正-><a href="{% url 'users:update' user.pk %}"> 修正 </a>
+        </h2>
+        <h3>
+            <p>ログインユーザ名: {{ user.line_username }}</p>
+            <p><a href="{% url 'users:logout' %}">ログアウト</a></p>  
+        </h3>
+            
     {% else %}
-    <a href="{% url 'social:begin' 'line' %}">lineでログイン</a>
+        <h1>
+            健康観察を自動入力するサイトです
+        </h1>
+        <h2>
+            <h3><a href="{% url 'social:begin' 'line' %}"> lineでログイン</a></h3>
+        </h2>
     {% endif %}
 {% endblock content %}
+
+AUTO KENKOU KANSATSU

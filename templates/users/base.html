@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>AUTO_KENKO_KANSATU</title>
+    <title>AUTO KENKOU KANSATSU</title>
 </head>
 <body>
     <nav class="navbar navbbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="/">AUTO_KENKO_KANSATU</a>
+            <a class="navbar-brand" href="/">AUTO KENKOU KANSATSU</a>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'users:index' %}">ホーム</a>
@@ -29,21 +29,20 @@
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="">メインページ</a>
+                        <a class="nav-link" href="{% url 'users:detail' user.pk %}">データ確認</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'users:logout' %}">ログアウト</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="">アカウント登録</a>
+                        <a class="nav-link" href="">　</a> {% comment "空白注意" %}{% endcomment %}
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'social:begin' 'line' %}">ログイン</a>
                     </li>
                 {% endif %}
             </ul>
-            
         </div>
     </nav>
     <main>
