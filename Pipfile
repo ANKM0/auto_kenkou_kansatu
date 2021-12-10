@@ -5,9 +5,8 @@ name = "pypi"
 
 [packages]
 django = "*"
-django-crispy-forms = "*"
-django-filter = "*"
 django-allauth = "*"
+social-auth-app-django = "*"
 
 [dev-packages]
 flake8 = "*"

@@ -1,0 +1,21 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <h2 class="my-4">使い方
+        <h3 class="my-4">
+            <ol>
+                <li>データを入力-><a href="{% url 'users:create' %}">入力</a></li>
+                <li>完了</li>
+            </ol>
+        </h3>
+        <h3 class="my-4">
+            もしデータ入力を間違えたら-><a href="{% url 'users:update' user.pk %}">更新</a>
+        </h3>
+        <h3>
+            自動入力を止めたい場合:<br>
+            <a href="{% url 'users:update' user.pk %}">更新ページ</a>から
+            
+            「実行するか」を "停止する" に変更
+        </h3>
+    </h2>
+{% endblock content %}

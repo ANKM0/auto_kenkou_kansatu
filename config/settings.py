@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,14 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',  # 追加
-    'django_filters',   # 追加した
-    'user',  # 追加
-    'django.contrib.sites',                         # 追加
-    'allauth',                                      # 追加
-    'allauth.account',                              # 追加
-    'allauth.socialaccount',                        # 追加
-    'allauth.socialaccount.providers.line',         # 追加
+
+    'social_django',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',  # 追加
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -62,7 +60,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +68,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
         },
     },
@@ -127,28 +128,39 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Authentication
-# Don't forget this little dude.
-SITE_ID = 1
-
-# ログインのリダイレクトURL
-LOGIN_REDIRECT_URL = 'howto'
-
-# ログアウトのリダイレクトURL
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    "allauth.account.auth_backends.AuthenticationBackend",
+  'social_core.backends.line.LineOAuth2',  # LINE認証用
+  'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIALACCOUNT_PROVIDERS = {
-    'line': {
-        'SCOPE': ['profile', 'openid'],
-    }
-}
+LOGIN_REDIRECT_URL = "/howto"
+LOGOUT_REDIRECT_URL = "/"
+
+
+AUTH_USER_MODEL = 'users.User'
+
+SOCIAL_AUTH_LINE_KEY = '1656675440'
+SOCIAL_AUTH_LINE_SECRET = 'f6ffccdc0df2d4f7028d018ff78bca35'
+
+SOCIAL_AUTH_PIPELINE = (
+    "social_core.pipeline.social_auth.social_details",
+    "social_core.pipeline.social_auth.social_uid",
+    "social_core.pipeline.social_auth.social_user",
+    "social_core.pipeline.user.get_username",
+    "social_core.pipeline.social_auth.associate_by_email",
+    "social_core.pipeline.user.create_user",
+    "social_core.pipeline.social_auth.associate_user",
+    "social_core.pipeline.social_auth.load_extra_data",
+    "social_core.pipeline.user.user_details",
+    # ↑ デフォルトの設定
+
+    "users.pipeline.set_user_data",  # users/pipeline.pyのset_user_data関数
+)
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
