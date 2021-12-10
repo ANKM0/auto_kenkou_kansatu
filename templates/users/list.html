@@ -2,14 +2,17 @@
 
 {% block content %}
 
-    <h1>userInfo List</h1>
-    <a href="/create">create</a>
-    <ul>
-        <p> {{ object.user_info_class_number }} </p>
-        <p> {{ object.user_info_student_number }} </p>
-        <p> {{ object.user_info_student_name }} </p>
-        <p> {{ object.user_info_body_temperature }} </p>
-        <p> {{ object.is_run_code }} </p>
+    <h1 class="my-4">ユーザーデータ</h1>
+    <ul class="my-4">
+        <p> クラス番号:　{{ object.user_info_class_number }} </p>
+        <p> 出席番号:　{{ object.user_info_student_number }} </p>
+        <p> 名前:　{{ object.user_info_student_name }} </p>
+        <p> 体温:　{{ object.user_info_body_temperature }} </p>
+        {% if object.is_run_code == 1 %}
+            <p>状態:　実行する</p>
+        {% elif object.is_run_code == 0 %}
+            <p>状態:　停止する</p>
+        {% endif %}
 
         <a href="{% url 'users:update' user.pk %}"> 更新 </a>
         {% comment %} <a href="{% url 'users:delete' user.pk %}"> 削除 </a> {% endcomment %}
