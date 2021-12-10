@@ -27,8 +27,8 @@ class UserInfoForm(forms.ModelForm):
         labels = {
             'user_info_class_number': 'クラス番号',
             'user_info_student_number': '出席番号',
-            'user_info_student_name': '名前',
-            'user_info_body_temperature': '体温',
+            'user_info_student_name': '名前　　',
+            'user_info_body_temperature': '体温　　',
             'is_run_code': '実行するか',
         }
         help_texts = {
@@ -36,7 +36,7 @@ class UserInfoForm(forms.ModelForm):
             'user_info_student_number': '出席番号を入力',
             'user_info_student_name': '名前を入力',
             'user_info_body_temperature': '体温を入力',
-            'is_run_code': '止める時は停止するを選択'
+            'is_run_code': '　止める時は停止するを選択'
         }
         widgets = {
             "実行するか": forms.RadioSelect(),
