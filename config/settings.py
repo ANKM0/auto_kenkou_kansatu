@@ -137,8 +137,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTHENTICATION_BACKENDS = (
-  'social_core.backends.line.LineOAuth2',  # LINE認証用
-  'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.line.LineOAuth2',  # LINE認証用
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 LOGIN_REDIRECT_URL = "/howto"
@@ -166,4 +166,13 @@ SOCIAL_AUTH_PIPELINE = (
 )
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-django_heroku.settings(locals())
+
+# 追加
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+# Debug=Falseの時だけ実行する設定
+if not DEBUG:
+    django_heroku.settings(locals())
