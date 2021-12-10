@@ -6,7 +6,7 @@
             使い方-><a href="{% url 'users:howto' %}"> 使い方 </a> 
         </h2>
         <h2 class="my-4">
-            データの確認-><a href="{% url 'users:create' %}"> 確認 </a>
+            データの確認-><a href="{% url 'users:detail' user.pk %}"> 確認 </a>
         </h2>
         <h2 class="my-4">
             データの修正-><a href="{% url 'users:update' user.pk %}"> 修正 </a>

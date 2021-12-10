@@ -54,11 +54,11 @@ class LogoutView(TemplateView):
 #         return resolve_url('users:update', pk=self.kwargs['pk'])
 
 
-class UserInfoCreateView(CreateView, LoginRequiredMixin):
+class UserInfoCreateView(LoginRequiredMixin, CreateView):
     model = UserInfo
     form_class = UserInfoForm
     template_name = "%s/form.html" % APP_LABEL_USER
-    success_url = "/"
+    success_url = "/"  # 成功時にリダイレクトするURL
 
     def form_valid(self, form):
         # データベースに保存する前のモデルオブジェクトを変数に格納
@@ -70,7 +70,7 @@ class UserInfoCreateView(CreateView, LoginRequiredMixin):
         return super().form_valid(form)
 
 
-class UserInfoDetailView(DetailView, LoginRequiredMixin):
+class UserInfoDetailView(LoginRequiredMixin, DetailView):
     model = UserInfo
     template_name = "%s/list.html" % APP_LABEL_USER
 
@@ -87,7 +87,7 @@ class UserInfoDetailView(DetailView, LoginRequiredMixin):
         return super().form_valid(form)
 
 
-class UserInfoUpdateView(UpdateView, LoginRequiredMixin):
+class UserInfoUpdateView(LoginRequiredMixin, UpdateView):
     model = UserInfo
     form_class = UserInfoForm
     template_name = "%s/form.html" % APP_LABEL_USER

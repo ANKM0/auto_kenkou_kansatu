@@ -1,7 +1,12 @@
 {% extends "./base.html" %}
 
 {% block content %}
-    <form method="post" class="form-group">  
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">送信</button>
+    </form>
+    {% comment %} <form method="post">  
         {% csrf_token %}
 
         {% for item in form %}
@@ -36,6 +41,6 @@
 
         {% endfor %}
     <button type="submit" class="submit btn btn-primary">保存</button>
-    </form>
+    </form> {% endcomment %}
 
 {% endblock %}
