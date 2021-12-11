@@ -147,8 +147,8 @@ LOGOUT_REDIRECT_URL = "/"
 
 AUTH_USER_MODEL = 'users.User'
 
-SOCIAL_AUTH_LINE_KEY = '1656675440'
-SOCIAL_AUTH_LINE_SECRET = 'f6ffccdc0df2d4f7028d018ff78bca35'
+SOCIAL_AUTH_LINE_KEY = os.environ['SOCIAL_AUTH_LINE_KEY']
+SOCIAL_AUTH_LINE_SECRET = os.environ['SOCIAL_AUTH_LINE_SECRET']
 
 SOCIAL_AUTH_PIPELINE = (
     "social_core.pipeline.social_auth.social_details",
@@ -176,3 +176,4 @@ except ImportError:
 # Debug=Falseの時だけ実行する設定
 if not DEBUG:
     django_heroku.settings(locals())
+
