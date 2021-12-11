@@ -4,11 +4,11 @@
     <h1 class="my-4">ページが見つかりません</h1><br>
     <h2 class="my-4">
         もしかして...ログインしていない？<br>
-        <a href="{% url 'social:begin' 'line' %}"> lineでログイン</a>
+        <a class="nav-link" href="{% url 'social:begin' 'line' %}"> lineでログイン</a>
     </h2>
     <h2 class="my-4">
         もしかして...データ入力していない？<br>
-        <a href="{% url 'users:create' %}">入力</a>
+        <a class="nav-link" href="{% url 'users:create' %}">入力</a>
     </h2>
     <h2 class="my-4">
         ホームページに戻る<br>
