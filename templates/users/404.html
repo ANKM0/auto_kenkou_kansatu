@@ -1,0 +1,13 @@
+{% extends 'users/base.html' %}
+
+{% block content %} 
+    <h1 class="my-4">ページが見つかりません</h1>
+    <h2 class="my-4">
+        もしかして...ログインしていない<br>
+        <a href="{% url 'social:begin' 'line' %}"> lineでログイン</a>
+    </h2>
+    <h2 class="my-4">
+        ホームページに戻る<br>
+        <a class="nav-link" href="{% url 'users:index' %}">ホーム</a>
+    </h2>
+{% endblock content %}
