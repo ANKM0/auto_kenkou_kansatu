@@ -32,7 +32,7 @@
                         <a class="nav-link" href="{% url 'users:detail' user.pk %}">データ確認</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:logout' %}">ログアウト</a>
+                        <a class="nav-link" href="{% url 'users:logout_safety' %}">ログアウト</a>
                     </li>
                 {% else %}
                     <li class="nav-item">

@@ -28,8 +28,8 @@ class HowtoView(TemplateView, LoginRequiredMixin):
     template_name = "%s/howto.html" % APP_LABEL_USER
 
 
-class LogoutView(TemplateView):
-    template_name = "%s/logout.html" % APP_LABEL_USER
+class LogoutSafetyView(TemplateView):
+    template_name = "%s/logout_safety.html" % APP_LABEL_USER
 
 
 # class OnlyYouMixin(UserPassesTestMixin):

@@ -9,10 +9,11 @@ urlpatterns = [
 
     path('', views.IndexView.as_view(), name='index'),
     path('howto/', views.HowtoView.as_view(), name='howto'),
+    path('logout_safety/', views.LogoutSafetyView.as_view(), name='logout_safety'),
+
 
     path("create/", views.UserInfoCreateView.as_view(), name="create"),
     path("detail/<int:pk>", views.UserInfoDetailView.as_view(), name="detail"),
-    # path("list/<int:pk>", views.UserInfoListView.as_view(), name="list"),
     path("update/<int:pk>/", views.UserInfoUpdateView.as_view(), name="update"),
     # path("delete/<int:pk>/", views.UserInfoDeleteView.as_view(), name="delete"),
 ]
