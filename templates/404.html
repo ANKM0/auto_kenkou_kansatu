@@ -1,9 +1,9 @@
 {% extends 'users/base.html' %}
 
 {% block content %} 
-    <h1 class="my-4">ページが見つかりません</h1>
+    <h1 class="my-4">ページが見つかりません</h1><br>
     <h2 class="my-4">
-        もしかして...ログインしていない<br>
+        もしかして...ログインしていない？<br>
         <a href="{% url 'social:begin' 'line' %}"> lineでログイン</a>
     </h2>
     <h2 class="my-4">
