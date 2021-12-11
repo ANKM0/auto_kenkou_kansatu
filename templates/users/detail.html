@@ -14,6 +14,12 @@
             <p>状態:　停止する</p>
         {% endif %}
 
+        {% if object.user_info_last_run_at is None %}
+            <p> 前回実行日:　Never </p>
+        {% else %}
+            <p>前回実行日:　{{ object.user_info_last_run_at }}</p>
+        {% endif %}
+
         <a href="{% url 'users:update' user.pk %}"> 更新 </a>
         {% comment %} <a href="{% url 'users:delete' user.pk %}"> 削除 </a> {% endcomment %}
     </ul>

@@ -92,6 +92,7 @@ class UserInfo(models.Model):
     is_run_code = models.IntegerField(choices=IS_RUN_CODE_CHOICES, default=True, verbose_name="実行するか")
     user_info_created_at = models.DateTimeField(default=timezone.now)
     user_info_updated_at = models.DateTimeField(auto_now_add=True)
+    user_info_last_run_at = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.user_info_student_name

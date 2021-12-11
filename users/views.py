@@ -72,7 +72,7 @@ class UserInfoCreateView(LoginRequiredMixin, CreateView):
 
 class UserInfoDetailView(LoginRequiredMixin, DetailView):
     model = UserInfo
-    template_name = "%s/list.html" % APP_LABEL_USER
+    template_name = "%s/detail.html" % APP_LABEL_USER
 
     def get_success_url(self):
         return resolve_url('users:detail', pk=self.kwargs['pk'])
