@@ -10,6 +10,7 @@ class UserInfoForm(forms.ModelForm):
     class Meta:
         model = UserInfo
         fields = (
+            "user_info_grade_number",
             "user_info_class_number",
             "user_info_student_number",
             "user_info_student_name",
@@ -17,6 +18,7 @@ class UserInfoForm(forms.ModelForm):
             "is_run_code",
         )
         field_order = [
+            "user_info_grade_number",
             "user_info_class_number",
             "user_info_student_number",
             "user_info_student_name",
@@ -25,6 +27,7 @@ class UserInfoForm(forms.ModelForm):
         ]
 
         labels = {
+            'user_info_grade_number': '学年　　',
             'user_info_class_number': 'クラス番号',
             'user_info_student_number': '出席番号',
             'user_info_student_name': '名前　　',
@@ -32,6 +35,7 @@ class UserInfoForm(forms.ModelForm):
             'is_run_code': '実行するか',
         }
         help_texts = {
+            'user_info_grade_number': '学年を入力',
             'user_info_class_number': 'クラス番号を入力',
             'user_info_student_number': '出席番号を入力',
             'user_info_student_name': '名前を入力',
@@ -39,5 +43,6 @@ class UserInfoForm(forms.ModelForm):
             'is_run_code': '　止める時は停止するを選択'
         }
         widgets = {
+            "学年": forms.RadioSelect(),
             "実行するか": forms.RadioSelect(),
         }
