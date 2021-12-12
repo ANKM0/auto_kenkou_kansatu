@@ -27,15 +27,15 @@ class UserInfoForm(forms.ModelForm):
         ]
 
         labels = {
-            'user_info_grade_number': '学年　　',
-            'user_info_class_number': 'クラス番号',
+            'user_info_grade_number': '学年　　 ',
+            'user_info_class_number': 'クラス番号 ',
             'user_info_student_number': '出席番号',
             'user_info_student_name': '名前　　',
             'user_info_body_temperature': '体温　　',
             'is_run_code': '実行するか',
         }
         help_texts = {
-            'user_info_grade_number': '学年を入力',
+            'user_info_grade_number': '　学年を入力',
             'user_info_class_number': 'クラス番号を入力',
             'user_info_student_number': '出席番号を入力',
             'user_info_student_name': '名前を入力',
