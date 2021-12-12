@@ -36,11 +36,11 @@ class UserInfoForm(forms.ModelForm):
         }
         help_texts = {
             'user_info_grade_number': '　学年を入力',
-            'user_info_class_number': 'クラス番号を入力',
+            'user_info_class_number': '　　　　　クラス番号を入力',
             'user_info_student_number': '出席番号を入力',
             'user_info_student_name': '名前を入力',
             'user_info_body_temperature': '体温を入力',
-            'is_run_code': '　止める時は停止するを選択',
+            'is_run_code': '　　止める時は停止するを選択',
         }
         widgets = {
             "学年": forms.RadioSelect(),
