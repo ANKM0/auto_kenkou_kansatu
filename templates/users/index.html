@@ -12,7 +12,8 @@
             データの修正-><a href="{% url 'users:update' user.pk %}"> 修正 </a>
         </h3><br>
         <h4 class="my-4">
-            <p>ログインユーザ名: {{ user.line_username }}</p>
+            <p>ログインユーザ名:<br> 
+            {{ user.line_username }}</p>
             <p><a href="{% url 'users:logout_safety' %}">ログアウト</a></p>  
         </h4>
             
