@@ -4,7 +4,8 @@
     <h1 class="my-4">ページが見つかりません</h1><br>
     {% if user.is_authenticated %}
         <h2 class="my-4">
-            もしかして...データ入力していない<br>
+            もしかして...<br>
+            データ入力していない<br>
             <a class="nav-link" href="{% url 'users:create' %}">入力</a>
         </h2>
     {% else %}
