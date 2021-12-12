@@ -3,7 +3,7 @@
 {% block content %} 
     <h1 class="my-4">既にデータが存在します</h1><br>
     <h2 class="my-4">
-        <a class="nav-link" href="{% url 'users:detail' user.pk %}">データ確認</a>
+        <a href="{% url 'users:detail' user.pk %}"> データ確認 </a>
     </h2><br>
     <h2 class="my-4">
         ホームページに戻る<br>
