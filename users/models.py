@@ -89,7 +89,7 @@ class UserInfo(models.Model):
         (1, '1年')
     )
 
-    username = models.OneToOneField(get_user_model(), on_delete=CASCADE)
+    username = models.OneToOneField(get_user_model(), on_delete=CASCADE, primary_key=True)
     user_info_grade_number = models.IntegerField(choices=GRADE_CHOICES, default=True, verbose_name="学年")
     user_info_class_number = models.PositiveSmallIntegerField(verbose_name="クラス番号")
     user_info_student_number = models.PositiveSmallIntegerField(verbose_name="出席番号")
