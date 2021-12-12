@@ -2,16 +2,19 @@
 
 {% block content %} 
     <h1 class="my-4">ページが見つかりません</h1><br>
-    <h2 class="my-4">
-        もしかして...ログインしていない？<br>
-        <a class="nav-link" href="{% url 'social:begin' 'line' %}"> lineでログイン</a>
-    </h2>
-    <h2 class="my-4">
-        もしかして...データ入力していない？<br>
-        <a class="nav-link" href="{% url 'users:create' %}">入力</a>
-    </h2>
-    <h2 class="my-4">
-        ホームページに戻る<br>
-        <a class="nav-link" href="{% url 'users:index' %}">ホーム</a>
-    </h2>
+    {% if user.is_authenticated %}
+        <h2 class="my-4">
+            もしかして...データ入力していない？<br>
+            <a class="nav-link" href="{% url 'users:create' %}">入力</a>
+        </h2>
+    {% else %}
+        <h2 class="my-4">
+            もしかして...ログインしていない？<br>
+            <a class="nav-link" href="{% url 'social:begin' 'line' %}"> lineでログイン</a>
+        </h2>
+    {% endif %}
+        <h2 class="my-4">
+            ホームページに戻る<br>
+            <a class="nav-link" href="{% url 'users:index' %}">ホーム</a>
+        </h2>
 {% endblock content %}
