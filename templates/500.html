@@ -2,11 +2,9 @@
 
 {% block content %} 
     <h1 class="my-4">既にデータが存在します</h1><br>
-    {% if user.is_authenticated %}
-        <h2 class="my-4">
-            <a class="nav-link" href="{% url 'users:create' %}">データ確認</a>
-        </h2><br>
-    {% endif %}
+    <h2 class="my-4">
+        <a class="nav-link" href="{% url 'users:create' %}">データ確認</a>
+    </h2><br>
     <h2 class="my-4">
         ホームページに戻る<br>
         <a class="nav-link" href="{% url 'users:index' %}">ホーム</a>
