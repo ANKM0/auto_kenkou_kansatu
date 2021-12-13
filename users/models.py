@@ -91,8 +91,8 @@ class UserInfo(models.Model):
 
     username = models.OneToOneField(get_user_model(), on_delete=CASCADE, primary_key=True)
     user_info_grade_number = models.IntegerField(choices=GRADE_CHOICES, default=True, verbose_name="学年")
-    user_info_class_number = models.PositiveSmallIntegerField(verbose_name="クラス番号")
-    user_info_student_number = models.PositiveSmallIntegerField(verbose_name="出席番号")
+    user_info_class_number = models.PositiveSmallIntegerField(max_length=10, verbose_name="クラス番号")
+    user_info_student_number = models.PositiveSmallIntegerField(max_length=40, verbose_name="出席番号")
     user_info_student_name = models.CharField(max_length=50, verbose_name="名前")
     user_info_body_temperature = models.CharField(max_length=10, verbose_name="体温")
     is_run_code = models.IntegerField(choices=IS_RUN_CODE_CHOICES, default=True, verbose_name="実行するか")
