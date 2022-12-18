@@ -1,6 +1,8 @@
 from django.contrib.auth import views as auth_views
-from django.urls import path
 from . import views
+from django.conf import settings
+from django.urls import path, re_path
+from django.views.static import serve
 
 
 urlpatterns = [
@@ -16,4 +18,6 @@ urlpatterns = [
     path("detail/<int:pk>", views.UserInfoDetailView.as_view(), name="detail"),
     path("update/<int:pk>/", views.UserInfoUpdateView.as_view(), name="update"),
     # path("delete/<int:pk>/", views.UserInfoDeleteView.as_view(), name="delete"),
+
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]
