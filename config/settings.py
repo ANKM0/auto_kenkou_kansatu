@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import django_heroku
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,9 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v68y-=^(ah=j(ntdw^^%+^(ffrwssx^g3r)@r+0*oj5#*h52z4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["https://auto-kenko-kansatsu.herokuapp.com/"]
+# ALLOWED_HOSTS = ["https://auto-kenko-kansatsu.herokuapp.com/"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -147,8 +150,12 @@ LOGOUT_REDIRECT_URL = "/"
 
 AUTH_USER_MODEL = 'users.User'
 
-SOCIAL_AUTH_LINE_KEY = os.environ['SOCIAL_AUTH_LINE_KEY']
-SOCIAL_AUTH_LINE_SECRET = os.environ['SOCIAL_AUTH_LINE_SECRET']
+
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
+
+SOCIAL_AUTH_LINE_KEY = env('SOCIAL_AUTH_LINE_KEY')
+SOCIAL_AUTH_LINE_SECRET = env('SOCIAL_AUTH_LINE_SECRET')
 
 
 SOCIAL_AUTH_PIPELINE = (
