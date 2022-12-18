@@ -26,8 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = True
+DEBUG = False
+# DEBUG = True
 
 # ALLOWED_HOSTS = ["https://auto-kenko-kansatsu.herokuapp.com/"]
 ALLOWED_HOSTS = ["*"]
@@ -130,7 +130,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "local_static")
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR.parent.parent, 'media')
 
 
 # Default primary key field type
@@ -174,14 +182,3 @@ SOCIAL_AUTH_PIPELINE = (
     "users.pipeline.set_user_data",  # users/pipeline.pyのset_user_data関数
 )
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-
-# 追加
-try:
-    from .local_settings import *
-except ImportError:
-    pass
-
-# Debug=Falseの時だけ実行する設定
-if not DEBUG:
-    django_heroku.settings(locals())
