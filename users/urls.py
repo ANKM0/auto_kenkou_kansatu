@@ -19,5 +19,10 @@ urlpatterns = [
     path("update/<int:pk>/", views.UserInfoUpdateView.as_view(), name="update"),
     # path("delete/<int:pk>/", views.UserInfoDeleteView.as_view(), name="delete"),
 
+    # path("accounts/", include("django.contrib.auth.urls")),
+    path("accounts/login/", auth_views.LoginView.as_view(), name="default_login"),
+    path("accounts/logout/", auth_views.LogoutView.as_view(), name="default_logout"),
+    path('guest_login/', views.guest_login, name='guest_login'),  # かんたんログイン用
+
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]
