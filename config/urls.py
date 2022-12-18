@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(('users.urls', "users"))),
 
-    path('', include('social_django.urls', namespace='social')),  # 追加
-    # path('auth/', include('allauth.urls')),     # 追加
+    path('', include('social_django.urls', namespace='social')),
+    # path('auth/', include('allauth.urls')),
 ]

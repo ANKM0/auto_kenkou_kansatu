@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
 import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -177,7 +176,6 @@ SOCIAL_AUTH_PIPELINE = (
     "social_core.pipeline.social_auth.associate_user",
     "social_core.pipeline.social_auth.load_extra_data",
     "social_core.pipeline.user.user_details",
-    # ↑ デフォルトの設定
 
     "users.pipeline.set_user_data",  # users/pipeline.pyのset_user_data関数
 )
