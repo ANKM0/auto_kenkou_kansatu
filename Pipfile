@@ -8,7 +8,6 @@ django = "*"
 django-allauth = "*"
 social-auth-app-django = "*"
 gunicorn = "*"
-django-heroku = "*"
 django-environ = "*"
 
 [dev-packages]
