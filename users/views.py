@@ -1,18 +1,19 @@
+from django.http import HttpResponse
+from django.views.generic.base import View
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, resolve_url
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
-from django.views.generic.base import View
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
+from django.contrib.auth import login
 
 from .forms import UserInfoForm
 from .models import UserInfo
-# from django.urls import reverse_lazy
+
 
 from.apps import UserConfig
 APP_LABEL_USER = UserConfig.name
-
-
-User = get_user_model()
 
 
 class LineLogin(View):
@@ -30,6 +31,12 @@ class HowtoView(TemplateView, LoginRequiredMixin):
 
 class LogoutSafetyView(TemplateView):
     template_name = "%s/logout_safety.html" % APP_LABEL_USER
+
+
+def guest_login(request) -> HttpResponse:
+    guest_user = get_user_model().objects.get(email='guestuser@example.com')
+    login(request, guest_user, backend='django.contrib.auth.backends.ModelBackend')
+    return redirect("users:index")
 
 
 # class OnlyYouMixin(UserPassesTestMixin):
