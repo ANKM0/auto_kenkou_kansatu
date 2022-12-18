@@ -154,7 +154,7 @@ AUTH_USER_MODEL = 'users.User'
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = env.get('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 SOCIAL_AUTH_LINE_KEY = env('SOCIAL_AUTH_LINE_KEY')
 SOCIAL_AUTH_LINE_SECRET = env('SOCIAL_AUTH_LINE_SECRET')
 
