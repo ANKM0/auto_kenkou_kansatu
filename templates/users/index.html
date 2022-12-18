@@ -1,9 +1,9 @@
 {% extends 'users/base.html' %}
 
-{% block content %} 
+{% block content %}
     {% if user.is_authenticated %}
         <h2 class="my-4">
-            使い方-><a href="{% url 'users:howto' %}"> 使い方 </a> 
+            使い方-><a href="{% url 'users:howto' %}"> 使い方 </a>
         </h2><br>
         <h3 class="my-4">
             データの確認-><a href="{% url 'users:detail' user.pk %}"> 確認 </a>
@@ -12,11 +12,11 @@
             データの修正-><a href="{% url 'users:update' user.pk %}"> 修正 </a>
         </h3><br>
         <h4 class="my-4">
-            <p>ログインユーザ名:<br> 
+            <p>ログインユーザ名:<br>
             {{ user.line_username }}</p>
-            <p><a href="{% url 'users:logout_safety' %}">ログアウト</a></p>  
+            <p><a href="{% url 'users:logout_safety' %}">ログアウト</a></p>
         </h4>
-            
+
     {% else %}
         <h1>
             健康観察を<br>
@@ -24,6 +24,7 @@
         </h1>
         <h2>
             <h3><a href="{% url 'social:begin' 'line' %}"> lineでログイン</a></h3>
+            <h3><a href="{% url 'users:guest_login' %}"> 簡単ログイン</a></h3>
         </h2>
     {% endif %}
 {% endblock content %}
