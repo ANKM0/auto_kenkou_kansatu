@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-v68y-=^(ah=j(ntdw^^%+^(ffrwssx^g3r)@r+0*oj5#*h52z4'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
@@ -154,6 +154,7 @@ AUTH_USER_MODEL = 'users.User'
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
 
+SECRET_KEY = env.get('SECRET_KEY')
 SOCIAL_AUTH_LINE_KEY = env('SOCIAL_AUTH_LINE_KEY')
 SOCIAL_AUTH_LINE_SECRET = env('SOCIAL_AUTH_LINE_SECRET')
 
