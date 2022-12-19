@@ -1,9 +1,11 @@
 {% extends 'users/base.html' %}
 
-{% block content %} 
+{% block content %}
+<div class="container">
     <h1 class="my-4">既にデータが存在します</h1><br>
     <h2 class="my-4">
         ホームページに戻る<br>
         <a class="nav-link" href="{% url 'users:index' %}">ホーム</a>
     </h2>
+</div>
 {% endblock content %}

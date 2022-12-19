@@ -1,30 +1,82 @@
 {% extends 'users/base.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <h2 class="my-4">
-            使い方-><a href="{% url 'users:howto' %}"> 使い方 </a>
-        </h2><br>
-        <h3 class="my-4">
-            データの確認-><a href="{% url 'users:detail' user.pk %}"> 確認 </a>
-        </h3>
-        <h3 class="my-4">
-            データの修正-><a href="{% url 'users:update' user.pk %}"> 修正 </a>
-        </h3><br>
-        <h4 class="my-4">
-            <p>ログインユーザ名:<br>
-            {{ user.line_username }}</p>
-            <p><a href="{% url 'users:logout_safety' %}">ログアウト</a></p>
-        </h4>
+<div class="container">
+    <div class="row .mt-5">
+        <br>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+        </div>
 
-    {% else %}
-        <h1>
-            健康観察を<br>
-            自動入力するサイトです
-        </h1>
-        <h2>
-            <h3><a href="{% url 'social:begin' 'line' %}"> lineでログイン</a></h3>
-            <h3><a href="{% url 'users:guest_login' %}"> 簡単ログイン</a></h3>
-        </h2>
-    {% endif %}
+        <div class="col-md-4">
+            {% if user.is_authenticated %}
+            <span>
+                <h2>ホームページ</h2>
+            </span>
+            <div class="table-main bg-light mt-3">
+                <table class="table">
+                    <tbody>
+
+                        {% if obj == 0 %}
+                            <tr>
+                                <td>
+                                    <p>データが登録されていません</p>
+                                </td>
+                                <td>
+                                    <div class="d-grid gap-2 position-relative">
+                                        <button class="btn btn-success" type="button"><a class="text-white stretched-link" href="{% url 'users:create' %}"> データ登録</a></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>
+                                    <p>データを確認できます</p>
+                                </td>
+                                <td>
+                                    <div class="d-grid gap-2 position-relative">
+                                        <button class="btn btn-success" type="button"><a class="text-white stretched-link" href="{% url 'users:detail' user.pk %}"> データ確認</a></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>データを変更できます</p>
+                                </td>
+                                <td>
+                                    <div class="d-grid gap-2 position-relative">
+                                        <button class="btn btn-primary" type="button"><a class="text-white stretched-link" href="{% url 'users:update' user.pk %}"> データ更新</a></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-end text-right mt-5">
+                    <button type="submit" class="btn btn-secondary rounded-pill">
+                        <a class="text-white" href="{% url 'users:howto' %}"> よくある質問</a>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+            {% else %}
+                <div class="table-main mt-3">
+                    <div class="m-5 py-3">
+                        <div class="d-grid gap-2 position-relative">
+                            <button class="btn btn-success" type="button"><a class="text-white stretched-link" href="{% url 'social:begin' 'line' %}"> lineログイン</a></button>
+                        </div>
+                        <div class="d-grid gap-2 pt-3 position-relative">
+                            <button class="btn btn-primary" type="button"><a class="text-white stretched-link" href="{% url 'users:guest_login' %}"> 簡単ログイン</a></button>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
 {% endblock content %}

@@ -1,11 +1,53 @@
 {% extends "./base.html" %}
+{% load widget_tweaks %}
 
 {% block content %}
 
-<form action="" method="POST">
-    {% csrf_token %}
-    <ul>{{form.as_p}}</ul>
-    <input type="submit" value="送信">
-</form>
+<div class="container">
+    <div class="row .mt-5">
+        <br>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <span>
+                <h2>ユーザー情報更新</h2>
+            </span>
+            <div class="table-main bg-light mt-3">
+                <div class="container">
+                    <form method="post" class="h-adr" novalidate>
+                        {% csrf_token %}
 
+                        <table class="table table-borderless">
+                            <tbody>
+                                {% for field in form  %}
+                                    <tr>
+                                        <td>
+                                            <p>{{field.label}}</p>
+                                        </td>
+                                        <td>
+                                            {{field | add_class:"form-control"}}
+                                            {{ field.errors }}
+                                        </td>
+                                        <td>
+                                            <p>{{field.help_text}}</p>
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <br>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" value="save" class="btn btn-secondary rounded-pill">更新する</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
 {% endblock %}

@@ -1,28 +1,85 @@
 {% extends "./base.html" %}
+{% load widget_tweaks %}
 
 {% block content %}
 
-    <h1 class="my-4">ユーザーデータ</h1>
-    <ul class="my-4">
-        <p> 学年:　{{ object.user_info_grade_number }} </p>
-        <p> クラス番号:　{{ object.user_info_class_number }} </p>
-        <p> 出席番号:　{{ object.user_info_student_number }} </p>
-        <p> 名前:　{{ object.user_info_student_name }} </p>
-        <p> 体温:　{{ object.user_info_body_temperature }} </p>
-        {% if object.is_run_code == 1 %}
-            <p>状態:　実行する</p>
-        {% elif object.is_run_code == 0 %}
-            <p>状態:　停止する</p>
-        {% endif %}
 
-        {% if object.user_info_last_run_at is None %}
-            <p> 前回実行日:　Never </p>
-        {% else %}
-            <p>前回実行日:　{{ object.user_info_last_run_at }}</p>
-        {% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <span>
+                <h2>ユーザー情報</h2>
+            </span>
+            <div class="table-main bg-light mt-3">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>学年</p>
+                            </td>
+                            <td>
+                                <p>{{ object.user_info_grade_number }} </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>データ登録</p>
+                            </td>
+                            <td>
+                                <p>{{ object.user_info_class_number }} </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>出席番号</p>
+                            </td>
+                            <td>
+                                <p>{{ object.user_info_student_number }} </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>名前</p>
+                            </td>
+                            <td>
+                                <p>{{ object.user_info_student_name }} </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>体温</p>
+                            </td>
+                            <td>
+                                <p>{{ object.user_info_body_temperature }} </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>前回実行日</p>
+                            </td>
+                            <td>
+                                {% if object.user_info_last_run_at is None %}
+                                    <p> - </p>
+                                {% else %}
+                                    <p>{{ object.user_info_last_run_at }}</p>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-        <a href="{% url 'users:update' user.pk %}"> 更新 </a>
-        {% comment %} <a href="{% url 'users:delete' user.pk %}"> 削除 </a> {% endcomment %}
-    </ul>
+                <div class="d-flex justify-content-end text-right mt-5">
+                    <button type="submit" class="btn btn-secondary rounded-pill">
+                        <a class="text-white" href="{% url 'users:update' user.pk %}"> ユーザー情報更新</a>
+                    </button>
+                </div>
+            </div>
 
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
 {% endblock %}

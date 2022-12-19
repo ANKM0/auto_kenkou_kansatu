@@ -24,6 +24,11 @@ class LineLogin(View):
 class IndexView(TemplateView):
     template_name = '%s/index.html' % APP_LABEL_USER
 
+    def get_context_data(self, *args, **kwargs):
+        ctx = super().get_context_data(*args, **kwargs)
+        ctx["obj"] = UserInfo.objects.filter(pk=self.request.user.pk).count()
+        return ctx
+
 
 class HowtoView(TemplateView, LoginRequiredMixin):
     template_name = "%s/howto.html" % APP_LABEL_USER
