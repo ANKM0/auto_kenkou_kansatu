@@ -3,7 +3,7 @@ from .models import UserInfo
 
 
 def is_exsist_data_in_userinfo(request: HttpResponse) -> bool:
-    len_match_data = UserInfo.objects.filter(username=request.user).count()
+    len_match_data = UserInfo.objects.filter(pk=request.user.pk).count()
     if len_match_data > 0:
         is_exsist_data_in_userinfo = True
     else:
