@@ -12,38 +12,36 @@
 </head>
 <body>
     <header class="mb-4">
-        <nav class="navbar navbbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
             <div class="container">
                 <a class="navbar-brand" href="/">AUTO KENKO KANSATSU</a>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:index' %}">ホーム</a>
-                        <a class="nav-link" href="
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav4">
+                    <ul class="navbar-nav">
                         {% if user.is_authenticated %}
-                            {% url 'users:howto' %}
+                            <li>
+                                <a class="nav-link" href="{% url 'users:howto' %}"> Q&A </a>
+                            </li>
+                            {% if is_exsist_data_in_userinfo %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'users:detail' user.pk %}">データ確認</a>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'users:logout_safety' %}">ログアウト</a>
+                            </li>
                         {% else %}
-                            {% url 'users:index' %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="">　</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'social:begin' 'line' %}">ログイン</a>
+                            </li>
                         {% endif %}
-                        ">使い方</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:detail' user.pk %}">データ確認</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:logout_safety' %}">ログアウト</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="">　</a> {% comment "空白注意" %}{% endcomment %}
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'social:begin' 'line' %}">ログイン</a>
-                        </li>
-                    {% endif %}
-                </ul>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>

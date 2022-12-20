@@ -75,6 +75,8 @@ TEMPLATES = [
 
                 "social_django.context_processors.backends",
                 "social_django.context_processors.login_redirect",
+
+                "users.custom_context.is_exsist_data_in_userinfo",
             ],
         },
     },
