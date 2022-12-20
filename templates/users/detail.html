@@ -70,11 +70,22 @@
                     </tbody>
                 </table>
 
-                <div class="d-flex justify-content-end text-right mt-5">
-                    <button type="submit" class="btn btn-secondary rounded-pill">
-                        <a class="text-white" href="{% url 'users:update' user.pk %}"> ユーザー情報更新</a>
-                    </button>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary rounded-pill">
+                                <a class="text-white" href="{% url 'users:index' %}"><i class="fas fa-home">戻る</i></a>
+                            </button>
+                        </div>
+                        <div class="col-8 d-flex justify-content-end text-right">
+                            <button type="submit" class="btn btn-secondary rounded-pill">
+                                <a class="text-white" href="{% url 'users:update' user.pk %}"> ユーザー情報更新</a>
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
 
         </div>

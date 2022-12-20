@@ -53,13 +53,17 @@ class NewVisitorTest(TestCase):
         self.assertRegex(self.browser.current_url, r'/detail/[0-9]')
         self.assertRegex(self.browser.find_element(By.XPATH, '/html/body/main/div/div/div/div[2]/div/table/tbody/tr[2]/td[2]/p'), r'[0-9]')
 
-    # def test_visit_update_from_homepage(self):
-    #     """ホームページからデータを確認できることをテスト"""
-    #     # ユーザがデータを確認する
-    #     self.browser.execute_script('arguments[0].click();', self.browser.find_element(By.XPATH, '//*[contains(text(),"データ確認")]'))
+        # 戻るボタンをクリック
+        self.browser.execute_script('arguments[0].click();', self.browser.find_element(By.XPATH, '//*[contains(text(),"戻る")]'))
+        self.assertEqual(self.browser.current_url, '/')
 
-    #     self.assertRegex(self.browser.current_url, r'/detail/[0-9]')
-    #     self.assertRegex(self.browser.find_element(By.XPATH, '/html/body/main/div/div/div/div[2]/div/table/tbody/tr[2]/td[2]/p'), r'[0-9]')
+    def test_visit_update_from_homepage(self):
+        """ホームページからデータを更新できることをテスト"""
+        # ユーザがデータを確認する
+        self.browser.execute_script('arguments[0].click();', self.browser.find_element(By.XPATH, '//*[contains(text(),"データ確認")]'))
+
+        self.assertRegex(self.browser.current_url, r'/detail/[0-9]')
+        self.assertRegex(self.browser.find_element(By.XPATH, '/html/body/main/div/div/div/div[2]/div/table/tbody/tr[2]/td[2]/p'), r'[0-9]')
 
     def test_visit_update_from_detail(self):
         """ユーザ情報ページからデータを更新できることをテスト"""
