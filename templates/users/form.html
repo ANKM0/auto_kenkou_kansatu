@@ -41,7 +41,12 @@
 
                         <br>
                         <div class="d-flex justify-content-end">
-                            <button type="submit" value="save" class="btn btn-secondary rounded-pill">更新する</button>
+                            {% if is_exsist_data_in_userinfo %}
+                                <button type="submit" value="save" class="btn btn-secondary rounded-pill">更新する</button>
+                            {% else %}
+                                <button type="submit" value="save" class="btn btn-secondary rounded-pill">登録する</button>
+                            {% endif %}
+
                         </div>
                     </form>
                 </div>
