@@ -3,8 +3,8 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth import get_user_model
 from django.urls import reverse, resolve
 
-from ..models import UserInfo
-from ..views import IndexView, HowtoView, LogoutSafetyView, UserInfoCreateView, UserInfoDetailView, UserInfoUpdateView, guest_login
+from users.models import UserInfo
+from users.views import IndexView, HowtoView, LogoutSafetyView, UserInfoCreateView, UserInfoDetailView, UserInfoUpdateView, guest_login
 
 
 class TestUrls(TestCase):
