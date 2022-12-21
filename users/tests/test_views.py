@@ -34,15 +34,6 @@ class HowtoViewTests(TestCase):
         self.client.login(username=self.test_user.username, email=self.test_user.email, password=self.password)
 
 
-class LogoutSafetyViewTests(TestCase):
-    """LogoutSafetyViewのテストクラス"""
-
-    def test_get(self):
-        """GET メソッドでアクセスしてステータスコード200を返されることを確認"""
-        response = self.client.get(reverse('users:logout_safety'))
-        self.assertEqual(response.status_code, 200)
-
-
 class UserInfoCreateViewTests(TestCase):
     """UserInfoCreateViewのテストクラス"""
 

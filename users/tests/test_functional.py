@@ -112,12 +112,5 @@ class NewVisitorTest(StaticLiveServerTestCase):
         """ログアウトできることを確認"""
         # ログアウトボタンをクリック
         self.driver.execute_script('arguments[0].click();', self.driver.find_element(By.XPATH, '//*[contains(text(),"ログアウト")]'))
-        self.assertEqual(self.driver.current_url, f'{self.live_server_url}/logout_safety/')
-
-        # ホームページに戻るボタンをクリック
-        self.driver.execute_script('arguments[0].click();', self.driver.find_element(By.XPATH, '//*[contains(text(),"ホームページ")]'))
-        # ログアウトをクリック
-        self.driver.execute_script('arguments[0].click();', self.driver.find_element(By.XPATH, '//a[contains(text(),"ログアウト")]'))
-        # safetyページでログアウトをクリック
-        self.driver.execute_script('arguments[0].click();', self.driver.find_element(By.XPATH, '/html/body/main/div/div/h2[1]/a'))
+        # ログアウトできることを確認
         self.assertEqual(self.driver.current_url, f'{self.live_server_url}/')
