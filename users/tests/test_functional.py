@@ -37,7 +37,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         options = Options()
         options.add_argument('--no-sandbox')
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         self.live_server_url = 'http://localhost:8000'
 
