@@ -11,6 +11,7 @@ gunicorn = "*"
 django-environ = "*"
 django-widgets-improved = "*"
 selenium = "*"
+webdriver-manager = "*"
 
 [dev-packages]
 flake8 = "*"
