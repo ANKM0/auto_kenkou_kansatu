@@ -30,4 +30,5 @@ jobs:
             SOCIAL_AUTH_LINE_KEY: ${{ secrets.SOCIAL_AUTH_LINE_KEY }}
             SOCIAL_AUTH_LINE_SECRET: ${{ secrets.SOCIAL_AUTH_LINE_SECRET }}
       run: |
+        python manage.py runserver 8000
         python manage.py test
