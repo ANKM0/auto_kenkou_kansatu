@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse, resolve
 
 from users.models import UserInfo
-from users.views import IndexView, HowtoView, LogoutSafetyView, UserInfoCreateView, UserInfoDetailView, UserInfoUpdateView, guest_login
+from users.views import IndexView, HowtoView, UserInfoCreateView, UserInfoDetailView, UserInfoUpdateView, guest_login
 
 
 class TestUrls(TestCase):
@@ -38,11 +38,6 @@ class TestUrls(TestCase):
         """howto ページへのリダイレクトをテスト"""
         url = reverse('users:howto')
         self.assertEqual(resolve(url).func.view_class, HowtoView)
-
-    def test_logout_safety_url(self):
-        """logout_safety ページへのリダイレクトをテスト"""
-        url = reverse('users:logout_safety')
-        self.assertEqual(resolve(url).func.view_class, LogoutSafetyView)
 
     def test_create_url(self):
         """create ページへのリダイレクトをテスト"""

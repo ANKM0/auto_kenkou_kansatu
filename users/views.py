@@ -34,10 +34,6 @@ class HowtoView(TemplateView, LoginRequiredMixin):
     template_name = "%s/howto.html" % APP_LABEL_USER
 
 
-class LogoutSafetyView(TemplateView):
-    template_name = "%s/logout_safety.html" % APP_LABEL_USER
-
-
 def guest_login(request) -> HttpResponse:
     guest_user = get_user_model().objects.get(email='guestuser@example.com')
     login(request, guest_user, backend='django.contrib.auth.backends.ModelBackend')
