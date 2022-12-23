@@ -25,7 +25,7 @@ python manage.py runserver
 
 # 健康観察を自動入力するシステムとサイト
 ## ソースコード
-https://github.com/ANKM0/showcase/tree/main/auto_kenkou_kansatu
+https://github.com/ANKM0/auto_kenkou_kansatu
 ## 設計資料
 
 <details>
