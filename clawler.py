@@ -124,14 +124,9 @@ def set_driver():
     """
     options = Options()
     options.add_argument('--incognito')
-    # options.add_argument('--headless')
+    options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-    # driver.implicitly_wait(30)
-
-    url = "https://forms.office.com/Pages/ResponsePage.aspx?id=skPpVutfMUa0cQNGQMsYbGpXnkvNOxxPlw82yuB56QdURUZTVVFIRkZWTkRBUEhUTktMSk84M1RFQS4u&qrcode=true"
-    driver.get(url)
-    # 最大の読み込み時間を設定
     wait = WebDriverWait(driver=driver, timeout=30)
 
     return driver, wait
