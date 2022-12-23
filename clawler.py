@@ -114,8 +114,7 @@ def get_user_data() -> list[Any]:
             user_info_last_run_at: int = target_columns[j][6]
             username_id: int = target_columns[j][7]
 
-            user_data_list += [user_info_grade_number, user_info_class_number, user_info_student_number, user_info_student_name, user_info_body_temperature, user_info_is_run_code, user_info_last_run_at, username_id]
-
+            user_data_list += [[user_info_grade_number, user_info_class_number, user_info_student_number, user_info_student_name, user_info_body_temperature, user_info_is_run_code, user_info_last_run_at, username_id]]
     return user_data_list
 
 
@@ -124,15 +123,15 @@ def set_driver():
     webdriverを設定する
     """
     options = Options()
-    options.add_argument('--incognito')  # シークレットモードで実行
-    options.add_argument('--headless')  # ブラウザ非表示で実行
+    options.add_argument('--incognito')
+    # options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     # driver.implicitly_wait(30)
 
     url = "https://forms.office.com/Pages/ResponsePage.aspx?id=skPpVutfMUa0cQNGQMsYbGpXnkvNOxxPlw82yuB56QdURUZTVVFIRkZWTkRBUEhUTktMSk84M1RFQS4u&qrcode=true"
     driver.get(url)
-    # 最大の読み込み時間を設定 今回は最大30秒待機できるようにする
+    # 最大の読み込み時間を設定
     wait = WebDriverWait(driver=driver, timeout=30)
 
     return driver, wait
@@ -174,6 +173,7 @@ def main():
 
     user_data_list = get_user_data()
     for i in range(0, len(user_data_list)):
+        print(user_data_list[i])
         for j in range(0, len(user_data_list[i])):
             user_info_grade_number = user_data_list[i][j]
             user_info_class_number = user_data_list[i][j]
@@ -205,8 +205,6 @@ def main():
                     print(f"{i}回目 正常に動作しました")
 
                 # get_ss(driver, "after.png")  #  送信ボタンをクリックした後のスクリーンショットを撮影
-                driver.quit()
-
                 print("Done " + datetime_to_str())
 
                 # LINE送信
@@ -214,6 +212,10 @@ def main():
                 # send_line_notify_image("after", "after.png")
                 send_line_notify_message(f"\n{i}回目 提出しました\n" + datetime_to_str())
 
+    driver.quit()
+
 
 if __name__ == "__main__":
     main()
+
+main()
