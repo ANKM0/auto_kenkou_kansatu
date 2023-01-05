@@ -1,6 +1,10 @@
 # auto_kenkou_kansatu
 健康観察を自動入力するシステムとサイト
 
+## URL
+EC2サーバーで公開中です <br>
+http://43.206.84.20/
+
 
 # 使い方
 1. ルートフォルダ(auto_kenkou_kansatu)直下に.envファイルを作成します <br>
