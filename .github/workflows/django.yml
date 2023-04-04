@@ -29,6 +29,7 @@ jobs:
             SECRET_KEY: ${{ secrets.SECRET_KEY }}
             SOCIAL_AUTH_LINE_KEY: ${{ secrets.SOCIAL_AUTH_LINE_KEY }}
             SOCIAL_AUTH_LINE_SECRET: ${{ secrets.SOCIAL_AUTH_LINE_SECRET }}
+            DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: |
         python manage.py runserver &
         python manage.py test
