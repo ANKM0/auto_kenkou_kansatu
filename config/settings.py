@@ -29,7 +29,7 @@ DEBUG = False
 # DEBUG = True
 
 # ALLOWED_HOSTS = ["https://auto-kenko-kansatsu.herokuapp.com/"]
-ALLOWED_HOSTS = ["ec2-43-206-84-20.ap-northeast-1.compute.amazonaws.com", "43.206.84.20","127.0.0.1"]
+ALLOWED_HOSTS = ["13.115.159.130"]
 
 
 # Application definition
@@ -88,12 +88,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
+    }
+}
 
 
 # Password validation
@@ -164,9 +164,9 @@ AUTH_USER_MODEL = 'users.User'
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
 
-DATABASES = {
-    'default': env.db(),
-}
+# DATABASES = {
+#     'default': env.db(),
+# }
 
 SECRET_KEY = env('SECRET_KEY')
 SOCIAL_AUTH_LINE_KEY = env('SOCIAL_AUTH_LINE_KEY')
@@ -190,6 +190,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 # gunicorn --bind 127.0.0.1:8000 config.wsgi -D
-# ec2-43-206-84-20.ap-northeast-1.compute.amazonaws.com
-
-# e9d9f16
