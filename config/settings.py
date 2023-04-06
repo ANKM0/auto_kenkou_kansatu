@@ -25,11 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = True
+DEBUG = False
+# DEBUG = True
 
 # ALLOWED_HOSTS = ["https://auto-kenko-kansatsu.herokuapp.com/"]
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["13.115.159.130"]
 
 
 # Application definition
@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -164,6 +164,10 @@ AUTH_USER_MODEL = 'users.User'
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
 
+# DATABASES = {
+#     'default': env.db(),
+# }
+
 SECRET_KEY = env('SECRET_KEY')
 SOCIAL_AUTH_LINE_KEY = env('SOCIAL_AUTH_LINE_KEY')
 SOCIAL_AUTH_LINE_SECRET = env('SOCIAL_AUTH_LINE_SECRET')
@@ -183,3 +187,6 @@ SOCIAL_AUTH_PIPELINE = (
     "users.pipeline.set_user_data",  # users/pipeline.pyのset_user_data関数
 )
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+# gunicorn --bind 127.0.0.1:8000 config.wsgi -D
