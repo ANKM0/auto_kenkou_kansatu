@@ -20,7 +20,6 @@ def click_by_execute_script(driver: WebDriver, wait_time: int, kind_of_selctor: 
         kind_of_selctor (str, optional): 対象要素を何を使って指定するか. Defaults to "XPATH".
         location_name (str, optional): 要素のxpath,id,name...etc. Defaults to "".
     """
-    # element = WebDriverWait(driver, wait_time).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/main/div/div[1]/div[1]/h2')))
     element = WebDriverWait(driver, wait_time).until(EC.element_to_be_clickable((getattr(By, f"{kind_of_selctor}"), location_name)))
     driver.execute_script("arguments[0].click();", element)
 
@@ -45,15 +44,15 @@ class UiTest(StaticLiveServerTestCase):
         prefs = {"profile.default_content_setting_values.notifications" : 2}
         options.add_experimental_option("prefs",prefs)
         cls.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-        cls.live_server_url = "http://127.0.0.1:8000/"
-        cls.driver.get(cls.live_server_url)
+        # cls.live_server_url = "http://127.0.0.1:8000/"
+        # cls.driver.get(cls.live_server_url)
 
     @classmethod
     def tearDownClass(cls):
         wait_time = 30
 
         # adminにログイン
-        cls.driver.get(cls.live_server_url + "admin/users/userinfo/")
+        cls.driver.get(cls.live_server_url + "admin/")
         cls.driver.execute_script('document.getElementById("id_username").value="xings";')
         cls.driver.execute_script('document.getElementById("id_password").value="gllilwe9d9f16";')
         # cls.driver.execute_script('arguments[0].click();', cls.driver.find_element(By.XPATH, '//*[@id="login-form"]/div[3]/input'))
@@ -61,6 +60,7 @@ class UiTest(StaticLiveServerTestCase):
 
 
         # user_infoを削除
+        cls.driver.get(cls.live_server_url + "/admin/users/userinfo/")
         # cls.driver.execute_script('arguments[0].click();', cls.driver.find_element(By.XPATH, '//*[@id="result_list"]/tbody/tr/th/a'))
         # cls.driver.execute_script('arguments[0].click();', cls.driver.find_element(By.XPATH, '//*[@id="userinfo_form"]/div/div/p/a'))
         # cls.driver.execute_script('arguments[0].click();', cls.driver.find_element(By.XPATH, '//*[@id="content"]/form/div/input[2]'))
