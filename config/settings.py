@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'social_django',
     'users',
     'widget_tweaks',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -187,6 +188,3 @@ SOCIAL_AUTH_PIPELINE = (
     "users.pipeline.set_user_data",  # users/pipeline.pyのset_user_data関数
 )
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-
-# gunicorn --bind 127.0.0.1:8000 config.wsgi -D
